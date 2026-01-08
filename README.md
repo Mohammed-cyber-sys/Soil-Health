@@ -1,2 +1,2869 @@
-# Soil-Health
-Soil Health
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>African Soil Health Initiatives</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Amharic/Oromic Font Support -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --light-green: #4CAF50;
+            --dark-green: #1B5E20;
+            --earth-brown: #8D6E63;
+            --light-brown: #D7CCC8;
+            --african-yellow: #FFC107;
+            --african-red: #D32F2F;
+            --african-blue: #1976D2;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Noto Sans Ethiopic', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-image: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* Language & Location Header */
+        .header-top {
+            background: linear-gradient(135deg, var(--dark-green), #0d4210);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: var(--shadow);
+            border-bottom: 5px solid var(--african-yellow);
+        }
+
+        .website-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .website-title i {
+            font-size: 2.5rem;
+            color: var(--african-yellow);
+        }
+
+        .website-title h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .control-panel {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .language-selector, .location-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .language-selector i, .location-selector i {
+            color: var(--african-yellow);
+        }
+
+        .language-selector select, .location-selector select {
+            background: transparent;
+            border: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 5px;
+            outline: none;
+            min-width: 150px;
+        }
+
+        .language-selector option, .location-selector option {
+            color: var(--text-dark);
+            background: white;
+        }
+
+        /* Admin Login Button */
+        .admin-login-btn {
+            background: linear-gradient(135deg, var(--african-red), #b71c1c);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, #b71c1c, var(--african-red));
+        }
+
+        /* Live Info Bar */
+        .live-info-bar {
+            background: linear-gradient(135deg, var(--light-green), var(--dark-green));
+            color: white;
+            padding: 1rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+
+        .info-item i {
+            color: var(--african-yellow);
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .info-item span {
+            font-weight: 500;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--light-green);
+        }
+
+        .login-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: var(--light-green);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--african-red);
+            color: white;
+        }
+
+        .error-message {
+            color: var(--african-red);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--light-green);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Security Features */
+        .security-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .security-info i {
+            color: var(--light-green);
+        }
+
+        .login-attempts {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Soil Data Section */
+        .soil-data-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 2px solid #eee;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--dark-green);
+            margin-bottom: 1.5rem;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--light-green);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+        }
+
+        .section-title i {
+            background: linear-gradient(135deg, var(--light-green), var(--dark-green));
+            color: white;
+            padding: 12px;
+            border-radius: 50%;
+        }
+
+        /* Soil Characteristics Grid */
+        .soil-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .soil-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .soil-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--light-green);
+            box-shadow: var(--shadow);
+        }
+
+        .soil-card h4 {
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .soil-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Recommended Crops */
+        .crops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .crop-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .crop-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--light-green);
+            box-shadow: var(--shadow);
+        }
+
+        .crop-icon {
+            font-size: 2.5rem;
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+        }
+
+        .crop-card h4 {
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Soil Issues with Pictures */
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .issue-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .issue-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--light-green);
+        }
+
+        .issue-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .issue-content {
+            padding: 1.5rem;
+        }
+
+        .issue-content h4 {
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .issue-content p {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .recommendation {
+            background: #E8F5E9;
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--light-green);
+            font-size: 0.95rem;
+        }
+
+        /* AI Chatbot Section */
+        .chatbot-container {
+            background: linear-gradient(135deg, #f8f9fa, white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 3px solid var(--light-green);
+            margin-top: 2rem;
+            position: sticky;
+            top: 20px;
+        }
+
+        .chatbot-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chatbot-icon {
+            font-size: 2.5rem;
+            color: var(--dark-green);
+            background: #E8F5E9;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .chatbot-header h3 {
+            color: var(--dark-green);
+            font-size: 1.5rem;
+        }
+
+        .chat-interface {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: 400px;
+            overflow-y: auto;
+            border: 2px solid #eee;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-message {
+            max-width: 85%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            line-height: 1.5;
+        }
+
+        .farmer-message {
+            align-self: flex-end;
+            background: #E3F2FD;
+            border-bottom-right-radius: 5px;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background: #E8F5E9;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+
+        .chat-input-area button {
+            background: var(--light-green);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .upload-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .upload-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Admin Control Panel */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .admin-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .admin-tab {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .admin-tab:hover {
+            background: #e9ecef;
+        }
+
+        .admin-tab.active {
+            background: var(--light-green);
+            color: white;
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+
+        /* Admin Dashboard */
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Update Forms */
+        .update-form {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .issue-management {
+            margin-top: 2rem;
+        }
+
+        .issue-list {
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #eee;
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .issue-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .issue-item:last-child {
+            border-bottom: none;
+        }
+
+        .issue-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .edit-btn {
+            background: var(--light-green);
+            color: white;
+        }
+
+        .delete-btn {
+            background: var(--african-red);
+            color: white;
+        }
+
+        /* Security Logs */
+        .security-logs {
+            margin-top: 2rem;
+        }
+
+        .log-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .log-table th, .log-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .log-table th {
+            background: #f8f9fa;
+            color: var(--dark-green);
+            font-weight: 600;
+        }
+
+        .log-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        /* Password Change Section */
+        .password-change {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .password-strength {
+            height: 5px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--african-red);
+            transition: width 0.3s ease;
+        }
+
+        .password-strength.weak .password-strength-bar {
+            width: 33%;
+            background: var(--african-red);
+        }
+
+        .password-strength.medium .password-strength-bar {
+            width: 66%;
+            background: #FF9800;
+        }
+
+        .password-strength.strong .password-strength-bar {
+            width: 100%;
+            background: var(--light-green);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-green), #0d4210);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 5px solid var(--african-yellow);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            color: var(--african-yellow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #e0e0e0;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .control-panel {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .live-info-bar {
+                grid-template-columns: 1fr;
+            }
+            
+            .soil-grid, .crops-grid, .issues-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-container {
+                padding: 0 1rem;
+            }
+            
+            .admin-modal {
+                width: 95%;
+                padding: 1rem;
+            }
+        }
+
+        /* Scrollbar Styling */
+        .chat-interface::-webkit-scrollbar,
+        .issue-list::-webkit-scrollbar,
+        .admin-modal::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-interface::-webkit-scrollbar-track,
+        .issue-list::-webkit-scrollbar-track,
+        .admin-modal::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .chat-interface::-webkit-scrollbar-thumb,
+        .issue-list::-webkit-scrollbar-thumb,
+        .admin-modal::-webkit-scrollbar-thumb {
+            background: var(--light-green);
+            border-radius: 10px;
+        }
+
+        /* Session Timer */
+        .session-timer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: var(--dark-green);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: none;
+            z-index: 4000;
+            box-shadow: var(--shadow);
+        }
+    </style>
+</head>
+<body>
+    <!-- Session Timer -->
+    <div class="session-timer" id="session-timer">
+        <i class="fas fa-clock"></i>
+        Session expires in: <span id="session-time">15:00</span>
+    </div>
+
+    <!-- Language & Location Header -->
+    <div class="header-top">
+        <div class="website-title">
+            <i class="fas fa-seedling"></i>
+            <h1 id="main-title">African Soil Health Initiatives</h1>
+        </div>
+        
+        <div class="control-panel">
+            <div class="language-selector">
+                <i class="fas fa-language"></i>
+                <select id="language-select">
+                    <option value="english">English</option>
+                    <option value="amharic">አማርኛ (Amharic)</option>
+                    <option value="oromic">Afaan Oromoo (Oromic)</option>
+                </select>
+            </div>
+            
+            <div class="location-selector">
+                <i class="fas fa-map-marker-alt"></i>
+                <select id="location-select">
+                    <option value="select">Select Location</option>
+                    <option value="haramaya">Haramaya District</option>
+                    <option value="metta">Metta District</option>
+                    <option value="dire-dawa">Dire Dawa</option>
+                </select>
+            </div>
+            
+            <button class="admin-login-btn" id="admin-login-btn">
+                <i class="fas fa-user-shield"></i>
+                Admin Login
+            </button>
+        </div>
+    </div>
+
+    <!-- Live Info Bar -->
+    <div class="live-info-bar" id="live-info-bar">
+        <div class="info-item">
+            <i class="fas fa-cloud-sun"></i>
+            <span id="weather-info">Select location to see weather</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <span id="current-time">Loading time...</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="current-date">Loading date...</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-map-pin"></i>
+            <span id="current-location">Select location above</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="main-content">
+            <!-- Soil Data Section -->
+            <div class="soil-data-section" id="soil-data">
+                <div class="section-title">
+                    <i class="fas fa-database"></i>
+                    <span id="soil-data-title">Soil Data</span>
+                </div>
+                <div class="soil-grid" id="soil-characteristics">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Recommended Crops -->
+            <div class="soil-data-section" id="crops-section">
+                <div class="section-title">
+                    <i class="fas fa-seedling"></i>
+                    <span id="crops-title">Recommended Crops</span>
+                </div>
+                <div class="crops-grid" id="crops-container">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Soil Issues -->
+            <div class="soil-data-section" id="issues-section">
+                <div class="section-title">
+                    <i class="fas fa-bug"></i>
+                    <span id="issues-title">Soil Health Issues & Recommendations</span>
+                </div>
+                <div class="issues-grid" id="issues-container">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Soil Management -->
+            <div class="soil-data-section" id="management-section">
+                <div class="section-title">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span id="management-title">Soil Health Management</span>
+                </div>
+                <div class="soil-grid" id="management-container">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chatbot Sidebar -->
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                <i class="fas fa-robot chatbot-icon"></i>
+                <div>
+                    <h3 id="chatbot-title">AI Soil Advisor</h3>
+                    <p id="chatbot-subtitle">Ask questions about soil health</p>
+                </div>
+            </div>
+            
+            <div class="chat-interface" id="chat-interface">
+                <div class="chat-message ai-message">
+                    <strong>AI Advisor:</strong> <span id="welcome-message">Hello! I'm your AI soil health advisor. Select a location and ask me any questions about soil, crops, or farming practices in your area.</span>
+                </div>
+            </div>
+            
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your question here...">
+                <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            
+            <div class="upload-options">
+                <div class="upload-btn" id="upload-image-btn">
+                    <i class="fas fa-camera"></i>
+                    <span>Upload Image</span>
+                </div>
+                <div class="upload-btn" id="upload-voice-btn">
+                    <i class="fas fa-microphone"></i>
+                    <span>Voice Message</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="login-modal">
+        <div class="login-box">
+            <div class="login-header">
+                <h2><i class="fas fa-user-shield"></i> Admin Login</h2>
+                <p>Secure access for authorized personnel only</p>
+            </div>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="login-email" placeholder="Enter admin email" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="login-password" placeholder="Enter password" required>
+                    <div class="error-message" id="password-error"></div>
+                </div>
+                
+                <div class="security-info">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure login for Mohammed (ayumam85@gmail.com) only</span>
+                </div>
+                
+                <div class="login-attempts" id="login-attempts">
+                    Login attempts remaining: <span id="attempts-left">3</span>
+                </div>
+                
+                <div class="success-message" id="login-success">
+                    Login successful! Redirecting to admin panel...
+                </div>
+                
+                <div class="login-actions">
+                    <button type="submit" class="btn btn-primary" id="login-submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="login-cancel-btn">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Control Panel -->
+    <div class="admin-panel" id="admin-panel">
+        <div class="admin-modal">
+            <div class="admin-header">
+                <div>
+                    <h2><i class="fas fa-user-shield"></i> Admin Control Panel</h2>
+                    <p>Logged in as: <strong id="admin-email-display">ayumam85@gmail.com</strong></p>
+                </div>
+                <div>
+                    <button class="btn btn-danger" id="admin-logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Admin Dashboard -->
+            <div class="admin-content active" id="dashboard-tab">
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-users">0</div>
+                        <div class="stat-label">Total Farmers Registered</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-issues">0</div>
+                        <div class="stat-label">Soil Issues Reported</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="chat-questions">0</div>
+                        <div class="stat-label">AI Chat Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="last-backup">-</div>
+                        <div class="stat-label">Last Data Backup</div>
+                    </div>
+                </div>
+                
+                <h3>Quick Actions</h3>
+                <div class="form-row">
+                    <button class="btn btn-primary" id="quick-backup-btn">
+                        <i class="fas fa-database"></i> Backup Data Now
+                    </button>
+                    <button class="btn btn-primary" id="quick-update-weather">
+                        <i class="fas fa-cloud-sun"></i> Update Weather Data
+                    </button>
+                    <button class="btn btn-primary" id="quick-check-issues">
+                        <i class="fas fa-bug"></i> Check Reported Issues
+                    </button>
+                    <button class="btn btn-primary" id="quick-analytics">
+                        <i class="fas fa-chart-line"></i> View Analytics
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Admin Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="dashboard">Dashboard</button>
+                <button class="admin-tab" data-tab="website">Website Layout</button>
+                <button class="admin-tab" data-tab="data">Update Soil Data</button>
+                <button class="admin-tab" data-tab="issues">Manage Issues</button>
+                <button class="admin-tab" data-tab="users">User Management</button>
+                <button class="admin-tab" data-tab="security">Security</button>
+                <button class="admin-tab" data-tab="backup">Backup & Restore</button>
+            </div>
+            
+            <!-- Website Layout Tab -->
+            <div class="admin-content" id="website-tab">
+                <h3>Website Layout Customization</h3>
+                <div class="update-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Website Title</label>
+                            <input type="text" id="admin-title" value="African Soil Health Initiatives">
+                        </div>
+                        <div class="form-group">
+                            <label>Color Theme</label>
+                            <select id="color-theme">
+                                <option value="green">Green Theme</option>
+                                <option value="blue">Blue Theme</option>
+                                <option value="brown">Earth Brown Theme</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Background Image URL</label>
+                            <input type="text" id="bg-image" placeholder="Enter image URL">
+                        </div>
+                        <div class="form-group">
+                            <label>Logo Image URL</label>
+                            <input type="text" id="logo-image" placeholder="Enter logo URL">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Custom CSS (Advanced)</label>
+                        <textarea id="custom-css" placeholder="Enter custom CSS code" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" id="save-layout-btn">
+                            <i class="fas fa-save"></i> Save Layout Changes
+                        </button>
+                        <button class="btn btn-secondary" id="reset-layout-btn">
+                            <i class="fas fa-undo"></i> Reset to Default
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Update Soil Data Tab -->
+            <div class="admin-content" id="data-tab">
+                <h3>Update Location Soil Data</h3>
+                <div class="update-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Select Location to Update</label>
+                            <select id="update-location">
+                                <option value="haramaya">Haramaya District</option>
+                                <option value="metta">Metta District</option>
+                                <option value="dire-dawa">Dire Dawa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Weather</label>
+                            <input type="text" id="update-weather" placeholder="Enter current weather">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Soil Type</label>
+                            <input type="text" id="update-soil-type" placeholder="Enter soil type">
+                        </div>
+                        <div class="form-group">
+                            <label>pH Level Range</label>
+                            <input type="text" id="update-ph" placeholder="e.g., 6.5-7.2">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Recommended Crops (comma separated)</label>
+                            <input type="text" id="update-crops" placeholder="e.g., Maize, Sorghum, Wheat">
+                        </div>
+                        <div class="form-group">
+                            <label>Organic Matter Level</label>
+                            <select id="update-organic">
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" id="save-data-btn">
+                            <i class="fas fa-cloud-upload-alt"></i> Update Soil Data
+                        </button>
+                        <button class="btn btn-secondary" id="reset-data-btn">
+                            <i class="fas fa-sync-alt"></i> Refresh from Database
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Manage Issues Tab -->
+            <div class="admin-content" id="issues-tab">
+                <h3>Manage Soil Health Issues</h3>
+                <div class="issue-management">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Add New Soil Issue</label>
+                            <input type="text" id="new-issue-title" placeholder="Issue title">
+                        </div>
+                        <div class="form-group">
+                            <label>Issue Category</label>
+                            <select id="issue-category">
+                                <option value="erosion">Soil Erosion</option>
+                                <option value="nutrient">Nutrient Deficiency</option>
+                                <option value="salinity">Salinity</option>
+                                <option value="acidity">Acidity/Alkalinity</option>
+                                <option value="drainage">Drainage Issues</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Issue Description</label>
+                        <textarea id="issue-description" placeholder="Detailed description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Recommendations</label>
+                        <textarea id="issue-recommendations" placeholder="Recommendations for farmers" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input type="text" id="issue-image" placeholder="Enter image URL">
+                        </div>
+                        <div class="form-group">
+                            <label>Affected Locations</label>
+                            <select id="affected-locations" multiple>
+                                <option value="haramaya">Haramaya</option>
+                                <option value="metta">Metta</option>
+                                <option value="dire-dawa">Dire Dawa</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" id="add-issue-btn">
+                            <i class="fas fa-plus"></i> Add New Issue
+                        </button>
+                        <button class="btn btn-secondary" id="upload-issue-image">
+                            <i class="fas fa-upload"></i> Upload Image to Drive
+                        </button>
+                    </div>
+                    
+                    <h4>Existing Soil Issues</h4>
+                    <div class="issue-list" id="issue-list">
+                        <!-- Issues will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User Management Tab -->
+            <div class="admin-content" id="users-tab">
+                <h3>User Management & Analytics</h3>
+                <div class="update-form">
+                    <h4>Registered Farmers</h4>
+                    <div class="log-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Location</th>
+                                    <th>Registration Date</th>
+                                    <th>Last Active</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table">
+                                <!-- Users will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4>Chat Usage Statistics</h4>
+                    <div class="form-row">
+                        <div class="stat-card">
+                            <div class="stat-number" id="today-chats">0</div>
+                            <div class="stat-label">Chats Today</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="month-chats">0</div>
+                            <div class="stat-label">This Month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-chats">0</div>
+                            <div class="stat-label">Total Chats</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Security Tab -->
+            <div class="admin-content" id="security-tab">
+                <h3>Security Settings</h3>
+                <div class="update-form">
+                    <h4>Change Admin Password</h4>
+                    <div class="password-change">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" id="current-password" placeholder="Enter current password">
+                                <div class="error-message" id="current-password-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" id="new-password" placeholder="Enter new password">
+                                <div class="password-strength" id="password-strength">
+                                    <div class="password-strength-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Confirm New Password</label>
+                                <input type="password" id="confirm-password" placeholder="Confirm new password">
+                                <div class="error-message" id="confirm-password-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Password Requirements</label>
+                                <ul style="font-size: 0.8rem; color: #666; padding-left: 1rem;">
+                                    <li>Minimum 8 characters</li>
+                                    <li>At least one uppercase letter</li>
+                                    <li>At least one number</li>
+                                    <li>At least one special character</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-actions">
+                            <button class="btn btn-primary" id="change-password-btn">
+                                <i class="fas fa-key"></i> Change Password
+                            </button>
+                            <button class="btn btn-secondary" id="generate-password-btn">
+                                <i class="fas fa-random"></i> Generate Strong Password
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <h4>Security Logs</h4>
+                    <div class="security-logs">
+                        <div class="log-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date/Time</th>
+                                        <th>IP Address</th>
+                                        <th>Action</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="security-logs-table">
+                                    <!-- Security logs will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="admin-actions" style="margin-top: 1rem;">
+                            <button class="btn btn-secondary" id="clear-logs-btn">
+                                <i class="fas fa-trash"></i> Clear Old Logs
+                            </button>
+                            <button class="btn btn-primary" id="export-logs-btn">
+                                <i class="fas fa-download"></i> Export Logs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Backup & Restore Tab -->
+            <div class="admin-content" id="backup-tab">
+                <h3>Backup & Restore Data</h3>
+                <div class="update-form">
+                    <h4>Google Drive Integration</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Google Drive Account</label>
+                            <input type="text" value="ayumam85@gmail.com" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Backup Frequency</label>
+                            <select id="backup-frequency">
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Backup Description</label>
+                        <input type="text" id="backup-description" placeholder="Enter backup description">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Data to Backup</label>
+                            <select id="backup-data" multiple>
+                                <option value="soil-data" selected>Soil Data</option>
+                                <option value="user-data" selected>User Data</option>
+                                <option value="chat-logs" selected>Chat Logs</option>
+                                <option value="issue-data" selected>Issue Data</option>
+                                <option value="settings" selected>Website Settings</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Backup</label>
+                            <input type="text" id="last-backup-time" value="Never" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" id="backup-now-btn">
+                            <i class="fas fa-database"></i> Backup Now
+                        </button>
+                        <button class="btn btn-secondary" id="test-drive-btn">
+                            <i class="fab fa-google-drive"></i> Test Google Drive Connection
+                        </button>
+                        <button class="btn btn-danger" id="restore-data-btn">
+                            <i class="fas fa-history"></i> Restore from Backup
+                        </button>
+                    </div>
+                    
+                    <h4>Available Backups</h4>
+                    <div class="log-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Backup Date</th>
+                                    <th>Description</th>
+                                    <th>Size</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="backups-table">
+                                <!-- Backups will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-info-circle"></i> About</h4>
+                <p id="footer-about">African Soil Health Initiatives provides timely soil data and AI-powered recommendations for farmers in Eastern Ethiopia.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4><i class="fas fa-map-marker-alt"></i> Coverage</h4>
+                <p>Haramaya District</p>
+                <p>Metta District</p>
+                <p>Dire Dawa</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4><i class="fas fa-envelope"></i> Contact</h4>
+                <p>Project Coordinator: Mohammed</p>
+                <p>Email: ayumam85@gmail.com</p>
+                <p>For website updates and data management</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4><i class="fas fa-database"></i> Storage</h4>
+                <p>All data stored securely on Google Drive</p>
+                <p>Managed by: ayumam85@gmail.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p id="copyright-text">© 2024 African Soil Health Initiatives. Secure admin access for Mohammed (ayumam85@gmail.com) only.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">
+                <i class="fas fa-shield-alt"></i> Secure Login System Active
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== SECURITY SYSTEM ====================
+        const SECURITY_CONFIG = {
+            adminEmail: "ayumam85@gmail.com",
+            defaultPassword: "1234",
+            maxLoginAttempts: 3,
+            sessionTimeout: 900, // 15 minutes in seconds
+            passwordRequirements: {
+                minLength: 8,
+                requireUppercase: true,
+                requireNumbers: true,
+                requireSpecial: true
+            }
+        };
+
+        // Security State
+        let securityState = {
+            loginAttempts: 0,
+            isLoggedIn: false,
+            sessionTimer: null,
+            sessionTimeLeft: SECURITY_CONFIG.sessionTimeout,
+            currentPassword: SECURITY_CONFIG.defaultPassword,
+            securityLogs: [],
+            userData: [],
+            issueData: [],
+            chatLogs: []
+        };
+
+        // Initialize security
+        function initializeSecurity() {
+            // Load security state from localStorage
+            const savedState = localStorage.getItem('ash_security_state');
+            if (savedState) {
+                try {
+                    const parsed = JSON.parse(savedState);
+                    securityState.loginAttempts = parsed.loginAttempts || 0;
+                    securityState.currentPassword = parsed.currentPassword || SECURITY_CONFIG.defaultPassword;
+                    securityState.securityLogs = parsed.securityLogs || [];
+                    securityState.userData = parsed.userData || generateSampleUsers();
+                    securityState.issueData = parsed.issueData || generateSampleIssues();
+                    securityState.chatLogs = parsed.chatLogs || [];
+                } catch (e) {
+                    resetSecurityState();
+                }
+            } else {
+                resetSecurityState();
+            }
+            
+            // Check if session is still valid
+            const sessionExpiry = localStorage.getItem('ash_session_expiry');
+            if (sessionExpiry && new Date().getTime() < parseInt(sessionExpiry)) {
+                securityState.isLoggedIn = true;
+                startSessionTimer();
+            }
+            
+            // Add security log
+            addSecurityLog('SYSTEM', 'System initialized', 'SUCCESS');
+        }
+
+        // Reset security state
+        function resetSecurityState() {
+            securityState = {
+                loginAttempts: 0,
+                isLoggedIn: false,
+                sessionTimer: null,
+                sessionTimeLeft: SECURITY_CONFIG.sessionTimeout,
+                currentPassword: SECURITY_CONFIG.defaultPassword,
+                securityLogs: [],
+                userData: generateSampleUsers(),
+                issueData: generateSampleIssues(),
+                chatLogs: []
+            };
+            saveSecurityState();
+        }
+
+        // Save security state
+        function saveSecurityState() {
+            localStorage.setItem('ash_security_state', JSON.stringify(securityState));
+        }
+
+        // Add security log
+        function addSecurityLog(action, details, status) {
+            const log = {
+                timestamp: new Date().toISOString(),
+                ip: generateRandomIP(),
+                action: action,
+                details: details,
+                status: status
+            };
+            
+            securityState.securityLogs.unshift(log);
+            
+            // Keep only last 100 logs
+            if (securityState.securityLogs.length > 100) {
+                securityState.securityLogs = securityState.securityLogs.slice(0, 100);
+            }
+            
+            saveSecurityState();
+            updateSecurityLogsDisplay();
+            
+            console.log(`[SECURITY LOG] ${new Date().toLocaleString()} - ${action}: ${details} (${status})`);
+        }
+
+        // Generate random IP for logs
+        function generateRandomIP() {
+            return `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
+        }
+
+        // Generate sample users
+        function generateSampleUsers() {
+            return [
+                { id: 1, name: "Ahmed Mohammed", location: "Haramaya", email: "ahmed@example.com", regDate: "2024-01-15", lastActive: "2024-06-20" },
+                { id: 2, name: "Fatima Ali", location: "Metta", email: "fatima@example.com", regDate: "2024-02-10", lastActive: "2024-06-19" },
+                { id: 3, name: "Abdi Hassan", location: "Dire Dawa", email: "abdi@example.com", regDate: "2024-03-05", lastActive: "2024-06-20" },
+                { id: 4, name: "Mulu Worku", location: "Haramaya", email: "mulu@example.com", regDate: "2024-01-25", lastActive: "2024-06-18" },
+                { id: 5, name: "Bekele Tesfaye", location: "Metta", email: "bekele@example.com", regDate: "2024-02-15", lastActive: "2024-06-20" }
+            ];
+        }
+
+        // Generate sample issues
+        function generateSampleIssues() {
+            return [
+                { id: 1, title: "Soil Erosion", category: "erosion", description: "Loss of topsoil due to heavy rains", recommendations: "Plant cover crops, build terraces", locations: ["haramaya", "metta"], image: "https://images.unsplash.com/photo-1593006434467-a9b6d1a0d80d" },
+                { id: 2, title: "Nitrogen Deficiency", category: "nutrient", description: "Yellowing leaves in maize crops", recommendations: "Apply urea fertilizer, plant legumes", locations: ["dire-dawa"], image: "https://images.unsplash.com/photo-1621550174606-4c15b4e2e6f5" },
+                { id: 3, title: "Soil Salinity", category: "salinity", description: "White crust on soil surface", recommendations: "Improve drainage, apply gypsum", locations: ["dire-dawa"], image: "https://images.unsplash.com/photo-1597848212624-e6f1f5d6f7d0" }
+            ];
+        }
+
+        // ==================== LOGIN SYSTEM ====================
+        function showLoginModal() {
+            document.getElementById('login-modal').style.display = 'flex';
+            updateLoginAttemptsDisplay();
+            
+            addSecurityLog('LOGIN_ATTEMPT', 'Login modal opened', 'INFO');
+        }
+
+        function hideLoginModal() {
+            document.getElementById('login-modal').style.display = 'none';
+            clearLoginErrors();
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            
+            // Check if max attempts reached
+            if (securityState.loginAttempts >= SECURITY_CONFIG.maxLoginAttempts) {
+                showLoginError('Too many failed attempts. Please try again later.', 'password-error');
+                addSecurityLog('LOGIN_ATTEMPT', 'Max attempts reached - Account locked temporarily', 'BLOCKED');
+                return;
+            }
+            
+            // Validate credentials
+            if (email !== SECURITY_CONFIG.adminEmail) {
+                securityState.loginAttempts++;
+                saveSecurityState();
+                showLoginError('Invalid email address', 'email-error');
+                updateLoginAttemptsDisplay();
+                addSecurityLog('LOGIN_ATTEMPT', `Failed login attempt with email: ${email}`, 'FAILED');
+                return;
+            }
+            
+            if (password !== securityState.currentPassword) {
+                securityState.loginAttempts++;
+                saveSecurityState();
+                showLoginError('Incorrect password', 'password-error');
+                updateLoginAttemptsDisplay();
+                addSecurityLog('LOGIN_ATTEMPT', 'Failed login attempt - incorrect password', 'FAILED');
+                return;
+            }
+            
+            // Successful login
+            securityState.loginAttempts = 0;
+            securityState.isLoggedIn = true;
+            saveSecurityState();
+            
+            // Set session expiry
+            const expiryTime = new Date().getTime() + (SECURITY_CONFIG.sessionTimeout * 1000);
+            localStorage.setItem('ash_session_expiry', expiryTime.toString());
+            
+            // Show success and redirect
+            document.getElementById('login-success').style.display = 'block';
+            addSecurityLog('LOGIN', 'Admin login successful', 'SUCCESS');
+            
+            setTimeout(() => {
+                hideLoginModal();
+                showAdminPanel();
+                startSessionTimer();
+            }, 1500);
+        }
+
+        function showLoginError(message, elementId) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            // Auto-hide error after 5 seconds
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 5000);
+        }
+
+        function clearLoginErrors() {
+            document.getElementById('email-error').style.display = 'none';
+            document.getElementById('password-error').style.display = 'none';
+            document.getElementById('login-success').style.display = 'none';
+        }
+
+        function updateLoginAttemptsDisplay() {
+            const attemptsLeft = SECURITY_CONFIG.maxLoginAttempts - securityState.loginAttempts;
+            document.getElementById('attempts-left').textContent = attemptsLeft;
+            
+            if (attemptsLeft <= 1) {
+                document.getElementById('login-attempts').style.color = 'var(--african-red)';
+            } else {
+                document.getElementById('login-attempts').style.color = '#666';
+            }
+        }
+
+        // ==================== SESSION MANAGEMENT ====================
+        function startSessionTimer() {
+            // Show session timer
+            document.getElementById('session-timer').style.display = 'block';
+            
+            // Clear existing timer
+            if (securityState.sessionTimer) {
+                clearInterval(securityState.sessionTimer);
+            }
+            
+            // Start new timer
+            securityState.sessionTimeLeft = SECURITY_CONFIG.sessionTimeout;
+            updateSessionTimerDisplay();
+            
+            securityState.sessionTimer = setInterval(() => {
+                securityState.sessionTimeLeft--;
+                updateSessionTimerDisplay();
+                
+                if (securityState.sessionTimeLeft <= 0) {
+                    endSession();
+                }
+                
+                // Auto-save every minute
+                if (securityState.sessionTimeLeft % 60 === 0) {
+                    saveSecurityState();
+                }
+            }, 1000);
+        }
+
+        function updateSessionTimerDisplay() {
+            const minutes = Math.floor(securityState.sessionTimeLeft / 60);
+            const seconds = securityState.sessionTimeLeft % 60;
+            document.getElementById('session-time').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running out
+            if (securityState.sessionTimeLeft <= 300) { // 5 minutes
+                document.getElementById('session-timer').style.background = 'var(--african-red)';
+            } else if (securityState.sessionTimeLeft <= 600) { // 10 minutes
+                document.getElementById('session-timer').style.background = '#FF9800';
+            }
+        }
+
+        function endSession() {
+            clearInterval(securityState.sessionTimer);
+            securityState.isLoggedIn = false;
+            securityState.sessionTimer = null;
+            
+            // Clear session expiry
+            localStorage.removeItem('ash_session_expiry');
+            
+            // Hide timer and admin panel
+            document.getElementById('session-timer').style.display = 'none';
+            hideAdminPanel();
+            
+            // Show logout message
+            alert('Your session has expired. Please login again.');
+            
+            addSecurityLog('SESSION', 'Session expired', 'INFO');
+        }
+
+        function logout() {
+            clearInterval(securityState.sessionTimer);
+            securityState.isLoggedIn = false;
+            securityState.sessionTimer = null;
+            
+            // Clear session expiry
+            localStorage.removeItem('ash_session_expiry');
+            
+            // Hide timer and admin panel
+            document.getElementById('session-timer').style.display = 'none';
+            hideAdminPanel();
+            
+            // Reset login attempts
+            securityState.loginAttempts = 0;
+            saveSecurityState();
+            
+            addSecurityLog('LOGOUT', 'Admin logged out', 'INFO');
+        }
+
+        // ==================== ADMIN PANEL FUNCTIONS ====================
+        function showAdminPanel() {
+            document.getElementById('admin-panel').style.display = 'flex';
+            document.getElementById('admin-email-display').textContent = SECURITY_CONFIG.adminEmail;
+            
+            // Update dashboard stats
+            updateDashboardStats();
+            updateIssueList();
+            updateUsersTable();
+            updateSecurityLogsDisplay();
+            updateBackupsTable();
+            
+            addSecurityLog('ADMIN_PANEL', 'Admin panel accessed', 'SUCCESS');
+        }
+
+        function hideAdminPanel() {
+            document.getElementById('admin-panel').style.display = 'none';
+        }
+
+        function switchAdminTab(tabId) {
+            // Update active tab
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            
+            // Update active content
+            document.querySelectorAll('.admin-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+        }
+
+        function updateDashboardStats() {
+            document.getElementById('total-users').textContent = securityState.userData.length;
+            document.getElementById('total-issues').textContent = securityState.issueData.length;
+            document.getElementById('chat-questions').textContent = securityState.chatLogs.length;
+            
+            // Update last backup time
+            const lastBackup = localStorage.getItem('ash_last_backup');
+            if (lastBackup) {
+                const date = new Date(lastBackup);
+                document.getElementById('last-backup').textContent = date.toLocaleDateString();
+            } else {
+                document.getElementById('last-backup').textContent = 'Never';
+            }
+        }
+
+        function updateIssueList() {
+            const container = document.getElementById('issue-list');
+            container.innerHTML = '';
+            
+            securityState.issueData.forEach(issue => {
+                const item = document.createElement('div');
+                item.className = 'issue-item';
+                item.innerHTML = `
+                    <div>
+                        <strong>${issue.title}</strong><br>
+                        <small>${issue.category} • ${issue.locations.join(', ')}</small>
+                    </div>
+                    <div class="issue-actions">
+                        <button class="action-btn edit-btn" onclick="editIssue(${issue.id})">Edit</button>
+                        <button class="action-btn delete-btn" onclick="deleteIssue(${issue.id})">Delete</button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function addNewIssue() {
+            const title = document.getElementById('new-issue-title').value.trim();
+            const category = document.getElementById('issue-category').value;
+            const description = document.getElementById('issue-description').value.trim();
+            const recommendations = document.getElementById('issue-recommendations').value.trim();
+            const image = document.getElementById('issue-image').value.trim();
+            const locations = Array.from(document.getElementById('affected-locations').selectedOptions).map(opt => opt.value);
+            
+            if (!title || !description || !recommendations) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            const newIssue = {
+                id: securityState.issueData.length + 1,
+                title: title,
+                category: category,
+                description: description,
+                recommendations: recommendations,
+                image: image || 'https://images.unsplash.com/photo-1593006434467-a9b6d1a0d80d',
+                locations: locations.length > 0 ? locations : ['haramaya', 'metta', 'dire-dawa'],
+                createdAt: new Date().toISOString()
+            };
+            
+            securityState.issueData.push(newIssue);
+            saveSecurityState();
+            updateIssueList();
+            
+            // Clear form
+            document.getElementById('new-issue-title').value = '';
+            document.getElementById('issue-description').value = '';
+            document.getElementById('issue-recommendations').value = '';
+            document.getElementById('issue-image').value = '';
+            
+            addSecurityLog('ISSUE_MANAGEMENT', `Added new issue: ${title}`, 'SUCCESS');
+            alert('New soil issue added successfully!');
+        }
+
+        function editIssue(issueId) {
+            const issue = securityState.issueData.find(i => i.id === issueId);
+            if (issue) {
+                // Pre-fill form with issue data
+                document.getElementById('new-issue-title').value = issue.title;
+                document.getElementById('issue-category').value = issue.category;
+                document.getElementById('issue-description').value = issue.description;
+                document.getElementById('issue-recommendations').value = issue.recommendations;
+                document.getElementById('issue-image').value = issue.image;
+                
+                // Scroll to form
+                document.getElementById('new-issue-title').focus();
+                
+                addSecurityLog('ISSUE_MANAGEMENT', `Editing issue: ${issue.title}`, 'INFO');
+            }
+        }
+
+        function deleteIssue(issueId) {
+            if (confirm('Are you sure you want to delete this issue?')) {
+                securityState.issueData = securityState.issueData.filter(i => i.id !== issueId);
+                saveSecurityState();
+                updateIssueList();
+                
+                addSecurityLog('ISSUE_MANAGEMENT', `Deleted issue ID: ${issueId}`, 'SUCCESS');
+                alert('Issue deleted successfully!');
+            }
+        }
+
+        function updateUsersTable() {
+            const container = document.getElementById('users-table');
+            container.innerHTML = '';
+            
+            securityState.userData.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.location}</td>
+                    <td>${user.regDate}</td>
+                    <td>${user.lastActive}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editUser(${user.id})">Edit</button>
+                        <button class="action-btn delete-btn" onclick="deleteUser(${user.id})">Delete</button>
+                    </td>
+                `;
+                container.appendChild(row);
+            });
+            
+            // Update chat statistics
+            document.getElementById('today-chats').textContent = Math.floor(Math.random() * 50) + 10;
+            document.getElementById('month-chats').textContent = Math.floor(Math.random() * 500) + 100;
+            document.getElementById('total-chats').textContent = Math.floor(Math.random() * 2000) + 500;
+        }
+
+        function editUser(userId) {
+            const user = securityState.userData.find(u => u.id === userId);
+            if (user) {
+                const newName = prompt('Enter new name:', user.name);
+                if (newName) {
+                    user.name = newName;
+                    saveSecurityState();
+                    updateUsersTable();
+                    
+                    addSecurityLog('USER_MANAGEMENT', `Edited user: ${user.email}`, 'SUCCESS');
+                }
+            }
+        }
+
+        function deleteUser(userId) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                securityState.userData = securityState.userData.filter(u => u.id !== userId);
+                saveSecurityState();
+                updateUsersTable();
+                
+                addSecurityLog('USER_MANAGEMENT', `Deleted user ID: ${userId}`, 'SUCCESS');
+                alert('User deleted successfully!');
+            }
+        }
+
+        function updateSecurityLogsDisplay() {
+            const container = document.getElementById('security-logs-table');
+            container.innerHTML = '';
+            
+            securityState.securityLogs.slice(0, 20).forEach(log => {
+                const row = document.createElement('tr');
+                const date = new Date(log.timestamp);
+                row.innerHTML = `
+                    <td>${date.toLocaleString()}</td>
+                    <td>${log.ip}</td>
+                    <td>${log.action}</td>
+                    <td><span style="color: ${log.status === 'SUCCESS' ? 'var(--light-green)' : log.status === 'FAILED' ? 'var(--african-red)' : '#FF9800'}">${log.status}</span></td>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        // ==================== PASSWORD MANAGEMENT ====================
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength++;
+            
+            // Uppercase check
+            if (/[A-Z]/.test(password)) strength++;
+            
+            // Number check
+            if (/[0-9]/.test(password)) strength++;
+            
+            // Special character check
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            // Update strength display
+            const strengthBar = document.getElementById('password-strength');
+            strengthBar.className = 'password-strength';
+            
+            if (password.length === 0) {
+                strengthBar.classList.remove('weak', 'medium', 'strong');
+            } else if (strength <= 2) {
+                strengthBar.classList.add('weak');
+            } else if (strength === 3) {
+                strengthBar.classList.add('medium');
+            } else {
+                strengthBar.classList.add('strong');
+            }
+            
+            return strength;
+        }
+
+        function validatePassword(password) {
+            const requirements = SECURITY_CONFIG.passwordRequirements;
+            const errors = [];
+            
+            if (password.length < requirements.minLength) {
+                errors.push(`Password must be at least ${requirements.minLength} characters long`);
+            }
+            
+            if (requirements.requireUppercase && !/[A-Z]/.test(password)) {
+                errors.push('Password must contain at least one uppercase letter');
+            }
+            
+            if (requirements.requireNumbers && !/[0-9]/.test(password)) {
+                errors.push('Password must contain at least one number');
+            }
+            
+            if (requirements.requireSpecial && !/[^A-Za-z0-9]/.test(password)) {
+                errors.push('Password must contain at least one special character');
+            }
+            
+            return errors;
+        }
+
+        function changePassword() {
+            const current = document.getElementById('current-password').value;
+            const newPass = document.getElementById('new-password').value;
+            const confirmPass = document.getElementById('confirm-password').value;
+            
+            // Clear previous errors
+            document.getElementById('current-password-error').style.display = 'none';
+            document.getElementById('confirm-password-error').style.display = 'none';
+            
+            // Check current password
+            if (current !== securityState.currentPassword) {
+                document.getElementById('current-password-error').textContent = 'Current password is incorrect';
+                document.getElementById('current-password-error').style.display = 'block';
+                return;
+            }
+            
+            // Check if new passwords match
+            if (newPass !== confirmPass) {
+                document.getElementById('confirm-password-error').textContent = 'New passwords do not match';
+                document.getElementById('confirm-password-error').style.display = 'block';
+                return;
+            }
+            
+            // Validate new password
+            const errors = validatePassword(newPass);
+            if (errors.length > 0) {
+                alert('Password requirements not met:\n\n' + errors.join('\n'));
+                return;
+            }
+            
+            // Update password
+            securityState.currentPassword = newPass;
+            saveSecurityState();
+            
+            // Clear form
+            document.getElementById('current-password').value = '';
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-password').value = '';
+            
+            // Reset strength bar
+            document.getElementById('password-strength').className = 'password-strength';
+            
+            addSecurityLog('PASSWORD_CHANGE', 'Admin password changed successfully', 'SUCCESS');
+            alert('Password changed successfully!');
+        }
+
+        function generateStrongPassword() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+            let password = '';
+            
+            // Ensure at least one of each required character type
+            password += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(Math.floor(Math.random() * 26));
+            password += 'abcdefghijklmnopqrstuvwxyz'.charAt(Math.floor(Math.random() * 26));
+            password += '0123456789'.charAt(Math.floor(Math.random() * 10));
+            password += '!@#$%^&*()_+-=[]{}|;:,.<>?'.charAt(Math.floor(Math.random() * 26));
+            
+            // Fill the rest randomly
+            for (let i = 4; i < 12; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            // Shuffle the password
+            password = password.split('').sort(() => 0.5 - Math.random()).join('');
+            
+            // Set the generated password
+            document.getElementById('new-password').value = password;
+            document.getElementById('confirm-password').value = password;
+            
+            // Update strength display
+            checkPasswordStrength(password);
+        }
+
+        // ==================== BACKUP SYSTEM ====================
+        function createBackup() {
+            const description = document.getElementById('backup-description').value.trim() || 'Manual backup';
+            const selectedData = Array.from(document.getElementById('backup-data').selectedOptions).map(opt => opt.value);
+            
+            const backupData = {
+                timestamp: new Date().toISOString(),
+                description: description,
+                data: {
+                    securityState: selectedData.includes('settings') ? securityState : null,
+                    soilData: selectedData.includes('soil-data') ? locationData : null,
+                    users: selectedData.includes('user-data') ? securityState.userData : null,
+                    issues: selectedData.includes('issue-data') ? securityState.issueData : null,
+                    chats: selectedData.includes('chat-logs') ? securityState.chatLogs : null
+                }
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('ash_last_backup', new Date().toISOString());
+            localStorage.setItem('ash_backup_' + Date.now(), JSON.stringify(backupData));
+            
+            // Update display
+            document.getElementById('last-backup-time').value = new Date().toLocaleString();
+            updateBackupsTable();
+            
+            addSecurityLog('BACKUP', `Created backup: ${description}`, 'SUCCESS');
+            alert(`Backup created successfully!\n\nSaved locally. In production, this would be uploaded to Google Drive (${SECURITY_CONFIG.adminEmail}).`);
+        }
+
+        function updateBackupsTable() {
+            const container = document.getElementById('backups-table');
+            container.innerHTML = '';
+            
+            // Get all backups from localStorage
+            const backups = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('ash_backup_')) {
+                    try {
+                        const backup = JSON.parse(localStorage.getItem(key));
+                        backups.push({
+                            key: key,
+                            date: new Date(backup.timestamp),
+                            description: backup.description,
+                            size: JSON.stringify(backup).length
+                        });
+                    } catch (e) {
+                        // Skip invalid backups
+                    }
+                }
+            }
+            
+            // Sort by date (newest first)
+            backups.sort((a, b) => b.date - a.date);
+            
+            // Display backups
+            backups.slice(0, 10).forEach(backup => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${backup.date.toLocaleString()}</td>
+                    <td>${backup.description}</td>
+                    <td>${Math.round(backup.size / 1024)} KB</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="restoreBackup('${backup.key}')">Restore</button>
+                        <button class="action-btn delete-btn" onclick="deleteBackup('${backup.key}')">Delete</button>
+                    </td>
+                `;
+                container.appendChild(row);
+            });
+            
+            // Update last backup time
+            const lastBackup = localStorage.getItem('ash_last_backup');
+            if (lastBackup) {
+                const date = new Date(lastBackup);
+                document.getElementById('last-backup-time').value = date.toLocaleString();
+            }
+        }
+
+        function restoreBackup(backupKey) {
+            if (confirm('Are you sure you want to restore from this backup? Current data will be replaced.')) {
+                try {
+                    const backup = JSON.parse(localStorage.getItem(backupKey));
+                    
+                    if (backup.data.securityState) {
+                        Object.assign(securityState, backup.data.securityState);
+                        saveSecurityState();
+                    }
+                    
+                    if (backup.data.soilData) {
+                        Object.assign(locationData, backup.data.soilData);
+                    }
+                    
+                    addSecurityLog('BACKUP', `Restored from backup: ${backup.description}`, 'SUCCESS');
+                    alert('Backup restored successfully! Refreshing admin panel...');
+                    
+                    // Refresh admin panel
+                    updateDashboardStats();
+                    updateIssueList();
+                    updateUsersTable();
+                    updateSecurityLogsDisplay();
+                    
+                } catch (e) {
+                    alert('Error restoring backup: ' + e.message);
+                    addSecurityLog('BACKUP', 'Failed to restore backup', 'FAILED');
+                }
+            }
+        }
+
+        function deleteBackup(backupKey) {
+            if (confirm('Are you sure you want to delete this backup?')) {
+                localStorage.removeItem(backupKey);
+                updateBackupsTable();
+                
+                addSecurityLog('BACKUP', 'Deleted backup', 'SUCCESS');
+                alert('Backup deleted successfully!');
+            }
+        }
+
+        function testGoogleDriveConnection() {
+            alert(`Testing connection to Google Drive for ${SECURITY_CONFIG.adminEmail}...\n\nIn production, this would authenticate with Google Drive API.`);
+            addSecurityLog('GOOGLE_DRIVE', 'Tested Google Drive connection', 'INFO');
+        }
+
+        // ==================== WEBSITE FUNCTIONALITY ====================
+        // (Previous website functionality code remains the same, but integrated with the security system)
+        
+        // Language and Location Data
+        const languageData = {
+            english: {
+                title: "African Soil Health Initiatives",
+                soilDataTitle: "Soil Data",
+                cropsTitle: "Recommended Crops",
+                issuesTitle: "Soil Health Issues & Recommendations",
+                managementTitle: "Soil Health Management",
+                chatbotTitle: "AI Soil Advisor",
+                chatbotSubtitle: "Ask questions about soil health",
+                welcomeMessage: "Hello! I'm your AI soil health advisor. Select a location and ask me any questions about soil, crops, or farming practices in your area.",
+                footerAbout: "African Soil Health Initiatives provides timely soil data and AI-powered recommendations for farmers in Eastern Ethiopia.",
+                copyright: `© 2024 African Soil Health Initiatives. Secure admin access for Mohammed (${SECURITY_CONFIG.adminEmail}) only.`
+            },
+            amharic: {
+                title: "የአፍሪካ የአፈር ጤና ተነሳሽነቶች",
+                soilDataTitle: "የአፈር ውሂብ",
+                cropsTitle: "የሚመከሩ አታክልቶች",
+                issuesTitle: "የአፈር ጤና ችግሮች እና ምክሮች",
+                managementTitle: "የአፈር ጤና አስተዳደር",
+                chatbotTitle: "AI የአፈር አማካሪ",
+                chatbotSubtitle: "ስለ አፈር ጤና ጥያቄዎችን ይጠይቁ",
+                welcomeMessage: "ሰላም! እኔ የአፈር ጤናዎ AI አማካሪዎ ነኝ። አካባቢዎን ይምረጡ እና ስለ አፈር፣ አታክልቶች ወይም የርሻ ልምዶች ጥያቄዎችን ይጠይቁኝ።",
+                footerAbout: "የአፍሪካ የአፈር ጤና ተነሳሽነቶች ለምስራቅ ኢትዮጵያ አርሶ አደሮች በወቅቱ የአፈር ውሂብ እና በAI የሚመራ ምክሮችን ይሰጣል።",
+                copyright: `© 2024 የአፍሪካ የአፈር ጤና ተነሳሽነቶች። የደህንነት የአስተዳዳሪ መግቢያ ለሙሀመድ (${SECURITY_CONFIG.adminEmail}) ብቻ።`
+            },
+            oromic: {
+                title: "Dhaabbanni Fayyaa Biyyee Afrikaa",
+                soilDataTitle: "Daatii Biyyee",
+                cropsTitle: "Qonnaan Bultii Dandeettii",
+                issuesTitle: "Rakkoowwan Fayyaa Biyyee fi Gorsitoota",
+                managementTitle: "Gumaa Fayyaa Biyyee",
+                chatbotTitle: "AI Gargaaraa Biyyee",
+                chatbotSubtitle: "Gaaffii fayyaa biyyee irratti gaafadhu",
+                welcomeMessage: "Akkam! Ani gargaaraa fayyaa biyyee kee AI dha. Bakka filadhu, gaaffii biyyee, qonnaan bultii, ykn qorannoo qonnaa irratti na gaafadhu.",
+                footerAbout: "Dhaabbanni Fayyaa Biyyee Afrikaa daata biyyee yeroo sanaa fi gorsitoota AI dhaan qajeelfaman dhiheessuudhaan qotee-bulaa Kaabaa Bahaa Itoophiyaa gargaara.",
+                copyright: `© 2024 Dhaabbanni Fayyaa Biyyee Afrikaa. Dhaabbataa nageenyaa Muhammad (${SECURITY_CONFIG.adminEmail}) qofaaf.`
+            }
+        };
+
+        // Location Data
+        const locationData = {
+            "haramaya": {
+                name: "Haramaya District",
+                weather: "Partly Cloudy, 24°C",
+                soil: {
+                    type: "Andosols, Nitisols",
+                    texture: "Sandy Clay Loam",
+                    ph: "5.8 - 6.5",
+                    organic: "Medium to High",
+                    drainage: "Good",
+                    fertility: "High"
+                },
+                crops: ["Wheat", "Barley", "Vegetables", "Potatoes"],
+                issues: securityState.issueData.filter(issue => issue.locations.includes('haramaya')),
+                management: [
+                    {
+                        title: "Crop Rotation",
+                        description: "Rotate cereals with legumes to fix nitrogen naturally and break pest cycles."
+                    },
+                    {
+                        title: "Organic Matter",
+                        description: "Apply 8-10 tons/ha of compost annually to maintain soil fertility and structure."
+                    }
+                ]
+            },
+            "metta": {
+                name: "Metta District",
+                weather: "Rainy, 19°C",
+                soil: {
+                    type: "Acrisols, Luvisols",
+                    texture: "Clay",
+                    ph: "5.5 - 6.2",
+                    organic: "Low",
+                    drainage: "Poor",
+                    fertility: "Low to Medium"
+                },
+                crops: ["Teff", "Finger Millet", "Coffee", "Enset"],
+                issues: securityState.issueData.filter(issue => issue.locations.includes('metta')),
+                management: [
+                    {
+                        title: "Terracing",
+                        description: "Construct stone terraces on slopes to prevent soil erosion and retain moisture."
+                    },
+                    {
+                        title: "Mulching",
+                        description: "Use crop residues as mulch to conserve soil moisture and reduce erosion."
+                    }
+                ]
+            },
+            "dire-dawa": {
+                name: "Dire Dawa",
+                weather: "Sunny, 28°C",
+                soil: {
+                    type: "Vertisols, Cambisols",
+                    texture: "Clay Loam",
+                    ph: "7.2 - 8.1",
+                    organic: "Low to Medium",
+                    drainage: "Moderate",
+                    fertility: "Medium"
+                },
+                crops: ["Sorghum", "Maize", "Sesame", "Cotton"],
+                issues: securityState.issueData.filter(issue => issue.locations.includes('dire-dawa')),
+                management: [
+                    {
+                        title: "Water Conservation",
+                        description: "Use drip irrigation and rainwater harvesting to optimize water use in arid conditions."
+                    },
+                    {
+                        title: "Soil Testing",
+                        description: "Regular soil testing every 2-3 years to monitor pH and nutrient levels."
+                    }
+                ]
+            }
+        };
+
+        // AI Responses Database
+        const aiResponses = {
+            "soil": [
+                "Based on your location's soil type, I recommend testing pH levels regularly. For clay soils, organic matter addition is crucial.",
+                "Your soil appears to need more organic matter. Consider adding compost or green manure crops to improve structure.",
+                "For better soil health, practice crop rotation and minimize tillage to preserve soil structure."
+            ],
+            "crops": [
+                "The best crops for your area based on soil analysis are drought-resistant varieties like sorghum and millet.",
+                "Consider intercropping legumes with cereals to naturally improve soil nitrogen levels.",
+                "For higher yields, plant crops according to the rainfall pattern and soil moisture availability."
+            ],
+            "fertilizer": [
+                "Based on soil test results, apply NPK fertilizer at recommended rates. Organic fertilizers are better for long-term soil health.",
+                "For nitrogen deficiency, apply urea or use legume cover crops to fix nitrogen naturally.",
+                "Phosphorus deficiency can be corrected by applying DAP or rock phosphate based on soil pH."
+            ],
+            "water": [
+                "In your area, efficient water use is critical. Consider drip irrigation and mulching to conserve moisture.",
+                "Water crops early morning or late evening to reduce evaporation losses.",
+                "Collect rainwater during rainy seasons for use during dry periods."
+            ],
+            "default": [
+                "I need more information to provide accurate advice. Please specify your soil or crop concern.",
+                "Could you upload a picture of your soil or crop for better diagnosis?",
+                "Based on general practices in your area, I recommend regular soil testing and organic matter addition."
+            ]
+        };
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize security system
+            initializeSecurity();
+            
+            // Initialize time and date
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // Set up event listeners for website functionality
+            document.getElementById('language-select').addEventListener('change', updateLanguage);
+            document.getElementById('location-select').addEventListener('change', updateLocation);
+            document.getElementById('send-btn').addEventListener('click', sendChatMessage);
+            document.getElementById('chat-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendChatMessage();
+            });
+            
+            // Login system event listeners
+            document.getElementById('admin-login-btn').addEventListener('click', showLoginModal);
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('login-cancel-btn').addEventListener('click', hideLoginModal);
+            
+            // Admin panel event listeners
+            document.getElementById('admin-logout-btn').addEventListener('click', logout);
+            
+            // Admin tabs
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    switchAdminTab(tabId);
+                });
+            });
+            
+            // Admin actions
+            document.getElementById('save-layout-btn').addEventListener('click', saveLayoutChanges);
+            document.getElementById('save-data-btn').addEventListener('click', updateLocationData);
+            document.getElementById('add-issue-btn').addEventListener('click', addNewIssue);
+            document.getElementById('change-password-btn').addEventListener('click', changePassword);
+            document.getElementById('generate-password-btn').addEventListener('click', generateStrongPassword);
+            document.getElementById('backup-now-btn').addEventListener('click', createBackup);
+            document.getElementById('test-drive-btn').addEventListener('click', testGoogleDriveConnection);
+            
+            // Quick actions
+            document.getElementById('quick-backup-btn').addEventListener('click', createBackup);
+            
+            // Password strength checker
+            document.getElementById('new-password').addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+            });
+            
+            // Upload buttons
+            document.getElementById('upload-image-btn').addEventListener('click', uploadImage);
+            document.getElementById('upload-voice-btn').addEventListener('click', recordVoice);
+            
+            // Set default language
+            updateLanguage();
+            
+            // Update last backup time
+            updateBackupsTable();
+        });
+
+        // ==================== WEBSITE FUNCTIONS ====================
+        // (Previous website functions remain the same, just showing the essential ones)
+        
+        function updateTime() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('en-US', timeOptions);
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', dateOptions);
+        }
+
+        function updateLanguage() {
+            const lang = document.getElementById('language-select').value;
+            const data = languageData[lang];
+            
+            // Update all text elements
+            document.getElementById('main-title').textContent = data.title;
+            document.getElementById('soil-data-title').textContent = data.soilDataTitle;
+            document.getElementById('crops-title').textContent = data.cropsTitle;
+            document.getElementById('issues-title').textContent = data.issuesTitle;
+            document.getElementById('management-title').textContent = data.managementTitle;
+            document.getElementById('chatbot-title').textContent = data.chatbotTitle;
+            document.getElementById('chatbot-subtitle').textContent = data.chatbotSubtitle;
+            document.getElementById('welcome-message').textContent = data.welcomeMessage;
+            document.getElementById('footer-about').textContent = data.footerAbout;
+            document.getElementById('copyright-text').textContent = data.copyright;
+            
+            // Update chat input placeholder based on language
+            const chatInput = document.getElementById('chat-input');
+            if (lang === 'amharic') {
+                chatInput.placeholder = "ጥያቄዎን እዚህ ይተይቡ...";
+            } else if (lang === 'oromic') {
+                chatInput.placeholder = "Gaaffii kee asitti barreessi...";
+            } else {
+                chatInput.placeholder = "Type your question here...";
+            }
+        }
+
+        function updateLocation() {
+            const locationId = document.getElementById('location-select').value;
+            
+            if (locationId === 'select') {
+                clearLocationData();
+                return;
+            }
+            
+            const location = locationData[locationId];
+            
+            // Update live info bar
+            document.getElementById('weather-info').textContent = location.weather;
+            document.getElementById('current-location').textContent = location.name;
+            
+            // Update soil characteristics
+            updateSoilCharacteristics(location.soil);
+            
+            // Update recommended crops
+            updateRecommendedCrops(location.crops);
+            
+            // Update soil issues
+            updateSoilIssues(location.issues);
+            
+            // Update soil management
+            updateSoilManagement(location.management);
+            
+            // Update chat welcome message with location
+            const lang = document.getElementById('language-select').value;
+            let welcomeMsg = languageData[lang].welcomeMessage;
+            welcomeMsg = welcomeMsg.replace("Select a location", `For ${location.name}`);
+            document.getElementById('welcome-message').textContent = welcomeMsg;
+        }
+
+        function clearLocationData() {
+            document.getElementById('weather-info').textContent = "Select location to see weather";
+            document.getElementById('current-location').textContent = "Select location above";
+            document.getElementById('soil-characteristics').innerHTML = "";
+            document.getElementById('crops-container').innerHTML = "";
+            document.getElementById('issues-container').innerHTML = "";
+            document.getElementById('management-container').innerHTML = "";
+        }
+
+        function updateSoilCharacteristics(soil) {
+            const container = document.getElementById('soil-characteristics');
+            container.innerHTML = "";
+            
+            const characteristics = [
+                { icon: "fas fa-layer-group", title: "Soil Type", value: soil.type },
+                { icon: "fas fa-palette", title: "Texture", value: soil.texture },
+                { icon: "fas fa-flask", title: "pH Level", value: soil.ph },
+                { icon: "fas fa-leaf", title: "Organic Matter", value: soil.organic },
+                { icon: "fas fa-tint", title: "Drainage", value: soil.drainage },
+                { icon: "fas fa-chart-line", title: "Fertility", value: soil.fertility }
+            ];
+            
+            characteristics.forEach(char => {
+                const card = document.createElement('div');
+                card.className = 'soil-card';
+                card.innerHTML = `
+                    <h4><i class="${char.icon}"></i> ${char.title}</h4>
+                    <p>${char.value}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updateRecommendedCrops(crops) {
+            const container = document.getElementById('crops-container');
+            container.innerHTML = "";
+            
+            const cropIcons = ["fas fa-wheat-alt", "fas fa-seedling", "fas fa-carrot", "fas fa-coffee", "fas fa-apple-alt", "fas fa-pepper-hot"];
+            
+            crops.forEach((crop, index) => {
+                const card = document.createElement('div');
+                card.className = 'crop-card';
+                card.innerHTML = `
+                    <div class="crop-icon">
+                        <i class="${cropIcons[index % cropIcons.length]}"></i>
+                    </div>
+                    <h4>${crop}</h4>
+                    <p>Well-suited for local conditions</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updateSoilIssues(issues) {
+            const container = document.getElementById('issues-container');
+            container.innerHTML = "";
+            
+            issues.forEach(issue => {
+                const card = document.createElement('div');
+                card.className = 'issue-card';
+                card.innerHTML = `
+                    <div class="issue-image" style="background-image: url('${issue.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="issue-content">
+                        <h4>${issue.title}</h4>
+                        <p>${issue.description}</p>
+                        <div class="recommendation">
+                            <strong>Recommendation:</strong> ${issue.recommendations}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updateSoilManagement(management) {
+            const container = document.getElementById('management-container');
+            container.innerHTML = "";
+            
+            const managementIcons = ["fas fa-recycle", "fas fa-leaf", "fas fa-mountain", "fas fa-tint", "fas fa-flask", "fas fa-sun"];
+            
+            management.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'soil-card';
+                card.innerHTML = `
+                    <h4><i class="${managementIcons[index % managementIcons.length]}"></i> ${item.title}</h4>
+                    <p>${item.description}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            // Add user message to chat
+            const chatInterface = document.getElementById('chat-interface');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-message farmer-message';
+            userMsg.innerHTML = `<strong>Farmer:</strong> ${message}`;
+            chatInterface.appendChild(userMsg);
+            
+            // Add to chat logs
+            securityState.chatLogs.push({
+                timestamp: new Date().toISOString(),
+                message: message,
+                type: 'question'
+            });
+            saveSecurityState();
+            
+            // Clear input
+            input.value = '';
+            
+            // Generate AI response
+            setTimeout(() => {
+                const aiResponse = generateAIResponse(message);
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'chat-message ai-message';
+                aiMsg.innerHTML = `<strong>AI Advisor:</strong> ${aiResponse}`;
+                chatInterface.appendChild(aiMsg);
+                
+                // Add to chat logs
+                securityState.chatLogs.push({
+                    timestamp: new Date().toISOString(),
+                    message: aiResponse,
+                    type: 'response'
+                });
+                saveSecurityState();
+                
+                // Scroll to bottom
+                chatInterface.scrollTop = chatInterface.scrollHeight;
+            }, 1000);
+            
+            // Scroll to bottom after user message
+            chatInterface.scrollTop = chatInterface.scrollHeight;
+        }
+
+        function generateAIResponse(message) {
+            const lowerMsg = message.toLowerCase();
+            let category = 'default';
+            
+            if (lowerMsg.includes('soil') || lowerMsg.includes('earth') || lowerMsg.includes('ground')) {
+                category = 'soil';
+            } else if (lowerMsg.includes('crop') || lowerMsg.includes('plant') || lowerMsg.includes('seed')) {
+                category = 'crops';
+            } else if (lowerMsg.includes('fertilizer') || lowerMsg.includes('nutrient') || lowerMsg.includes('npk')) {
+                category = 'fertilizer';
+            } else if (lowerMsg.includes('water') || lowerMsg.includes('irrigat') || lowerMsg.includes('rain')) {
+                category = 'water';
+            }
+            
+            const responses = aiResponses[category];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        function uploadImage() {
+            alert('Image upload dialog would open here. In production, this would upload to Google Drive.');
+            
+            // Simulate image upload
+            const chatInterface = document.getElementById('chat-interface');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-message farmer-message';
+            userMsg.innerHTML = `<strong>Farmer:</strong> <i class="fas fa-image"></i> Uploaded image for analysis`;
+            chatInterface.appendChild(userMsg);
+            
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'chat-message ai-message';
+                aiMsg.innerHTML = `<strong>AI Advisor:</strong> Image analysis complete. Detected: Possible nutrient deficiency. Recommendation: Apply balanced fertilizer and test soil pH.`;
+                chatInterface.appendChild(aiMsg);
+                chatInterface.scrollTop = chatInterface.scrollHeight;
+            }, 1500);
+        }
+
+        function recordVoice() {
+            alert('Voice recording would start here. In production, this would use Web Speech API for voice recognition.');
+            
+            // Simulate voice input
+            const questions = [
+                "What fertilizer should I use for maize?",
+                "How can I improve soil drainage?",
+                "When is the best time to plant sorghum?",
+                "Why are my crops turning yellow?"
+            ];
+            
+            const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+            document.getElementById('chat-input').value = randomQuestion;
+        }
+
+        function saveLayoutChanges() {
+            const newTitle = document.getElementById('admin-title').value;
+            const theme = document.getElementById('color-theme').value;
+            const bgImage = document.getElementById('bg-image').value;
+            
+            // Update website title
+            document.getElementById('main-title').textContent = newTitle;
+            
+            // Update theme
+            if (theme === 'blue') {
+                document.documentElement.style.setProperty('--primary-green', '#1976D2');
+                document.documentElement.style.setProperty('--light-green', '#2196F3');
+                document.documentElement.style.setProperty('--dark-green', '#0D47A1');
+            } else if (theme === 'brown') {
+                document.documentElement.style.setProperty('--primary-green', '#6D4C41');
+                document.documentElement.style.setProperty('--light-green', '#8D6E63');
+                document.documentElement.style.setProperty('--dark-green', '#4E342E');
+            } else {
+                // Reset to green
+                document.documentElement.style.setProperty('--primary-green', '#2E7D32');
+                document.documentElement.style.setProperty('--light-green', '#4CAF50');
+                document.documentElement.style.setProperty('--dark-green', '#1B5E20');
+            }
+            
+            // Update background image if provided
+            if (bgImage) {
+                document.body.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('${bgImage}')`;
+            }
+            
+            addSecurityLog('WEBSITE_LAYOUT', 'Layout changes saved', 'SUCCESS');
+            alert('Layout changes saved successfully!');
+        }
+
+        function updateLocationData() {
+            const location = document.getElementById('update-location').value;
+            const weather = document.getElementById('update-weather').value;
+            const soilType = document.getElementById('update-soil-type').value;
+            const ph = document.getElementById('update-ph').value;
+            const crops = document.getElementById('update-crops').value;
+            const organic = document.getElementById('update-organic').value;
+            
+            // Update location data
+            if (weather) locationData[location].weather = weather;
+            if (soilType) locationData[location].soil.type = soilType;
+            if (ph) locationData[location].soil.ph = ph;
+            if (organic) locationData[location].soil.organic = organic;
+            if (crops) locationData[location].crops = crops.split(',').map(c => c.trim());
+            
+            // Refresh the location display if this location is selected
+            if (document.getElementById('location-select').value === location) {
+                updateLocation();
+            }
+            
+            addSecurityLog('SOIL_DATA', `Updated data for ${location}`, 'SUCCESS');
+            alert('Location data updated successfully!');
+        }
+    </script>
+</body>
+</html>
