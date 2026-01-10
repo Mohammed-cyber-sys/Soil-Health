@@ -1,9 +1,15 @@
-# Force Linguist to correctly categorize the backend as Python
-backend/**/* linguist-language=Python
-# Classify all frontend style and script files correctly
+# Force correct language detection for this project
+backend/**/*.py linguist-language=Python
+frontend/**/*.css linguist-language=CSS
+frontend/**/*.js linguist-language=JavaScript
+frontend/**/*.html linguist-language=HTML
+# Explicitly classify common file types
+*.py linguist-language=Python
 *.css linguist-language=CSS
 *.js linguist-language=JavaScript
 *.html linguist-language=HTML
-# Optionally, ensure key files like 'requirements.txt' are seen as part of a Python project
-requirements.txt linguist-detectable
-Procfile linguist-detectable
+*.json linguist-language=JSON
+*.md linguist-language=Markdown
+# Mark specific directories for detection
+backend/ linguist-detectable=true
+frontend/ linguist-detectable=true
