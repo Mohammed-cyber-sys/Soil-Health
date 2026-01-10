@@ -1,0 +1,44 @@
+{
+  "name": "soil-health-website",
+  "version": "1.0.0",
+  "description": "AI-Powered Soil Health Analysis Platform",
+  "main": "frontend/index.html",
+  "scripts": {
+    "start": "cd backend && python app.py",
+    "dev:backend": "cd backend && python app.py",
+    "dev:frontend": "cd frontend && python -m http.server 8000",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "install:backend": "cd backend && pip install -r requirements.txt",
+    "deploy:backend": "cd backend && echo 'Follow Railway/Render deployment instructions'",
+    "test": "echo 'No tests specified'",
+    "build": "echo 'No build step required for static site'",
+    "lint": "echo 'No linting configured'"
+  },
+  "keywords": [
+    "agriculture",
+    "soil-health",
+    "ai",
+    "farming",
+    "sustainability"
+  ],
+  "author": "AgriSmart Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/soil-health-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/soil-health-website/issues"
+  },
+  "homepage": "https://YOUR_USERNAME.github.io/soil-health-website",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  },
+  "dependencies": {
+    "axios": "^1.6.2"
+  }
+}
